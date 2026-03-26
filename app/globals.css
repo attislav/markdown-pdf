@@ -45,13 +45,11 @@
   }
 
   .print-content {
-    margin-top: 76px;
-    margin-bottom: 44px;
     padding: 0 32px;
   }
 
   @page {
-    margin: 0;
+    margin: 72px 32px 50px 32px;
     size: A4;
   }
 }
@@ -79,6 +77,12 @@
 .prose table { width: 100%; border-collapse: collapse; margin: 1em 0; }
 .prose th { background: #f9fafb; font-weight: 600; text-align: left; padding: 0.5em 0.75em; border: 1px solid #e5e7eb; }
 .prose td { padding: 0.5em 0.75em; border: 1px solid #e5e7eb; }
+/* Tabellen-Seitenumbruch: Kopfzeile wiederholen, Zeilen nicht mittendrin trennen */
+@media print {
+  .prose table { page-break-inside: auto; }
+  .prose tr { page-break-inside: avoid; page-break-after: auto; }
+  .prose thead { display: table-header-group; }
+}
 .prose hr { border: none; border-top: 2px solid #e5e7eb; margin: 1.5em 0; }
 .prose a { color: #3b82f6; text-decoration: underline; }
 .prose strong { font-weight: 700; }
