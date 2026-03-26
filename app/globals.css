@@ -14,9 +14,8 @@
   }
 
   .print-header {
-    display: block !important;
     position: fixed;
-    top: 0;
+    top: -68px;
     left: 0;
     right: 0;
     height: 60px;
@@ -25,12 +24,20 @@
     padding: 10px 32px;
     display: flex;
     align-items: center;
+    z-index: 1000;
+  }
+
+  .print-header img {
+    max-height: 40px;
+    max-width: 200px;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 
   .print-footer {
-    display: block !important;
     position: fixed;
-    bottom: 0;
+    bottom: -42px;
     left: 0;
     right: 0;
     height: 36px;
@@ -42,6 +49,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 1000;
   }
 
   .print-content {
@@ -49,7 +57,7 @@
   }
 
   @page {
-    margin: 72px 32px 50px 32px;
+    margin: 75px 32px 48px 32px;
     size: A4;
   }
 }
@@ -77,11 +85,14 @@
 .prose table { width: 100%; border-collapse: collapse; margin: 1em 0; }
 .prose th { background: #f9fafb; font-weight: 600; text-align: left; padding: 0.5em 0.75em; border: 1px solid #e5e7eb; }
 .prose td { padding: 0.5em 0.75em; border: 1px solid #e5e7eb; }
-/* Tabellen-Seitenumbruch: Kopfzeile wiederholen, Zeilen nicht mittendrin trennen */
+/* Tabellen-Seitenumbruch */
 @media print {
-  .prose table { page-break-inside: auto; }
-  .prose tr { page-break-inside: avoid; page-break-after: auto; }
+  .prose table { page-break-inside: auto; border-collapse: collapse; }
+  .prose tr { page-break-inside: avoid !important; break-inside: avoid !important; }
   .prose thead { display: table-header-group; }
+  .prose tbody tr { page-break-inside: avoid; break-inside: avoid; }
+  /* Überschriften nicht allein am Seitenende lassen */
+  .prose h1, .prose h2, .prose h3 { page-break-after: avoid; break-after: avoid; }
 }
 .prose hr { border: none; border-top: 2px solid #e5e7eb; margin: 1.5em 0; }
 .prose a { color: #3b82f6; text-decoration: underline; }
