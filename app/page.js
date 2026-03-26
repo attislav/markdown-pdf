@@ -6,6 +6,15 @@ import {
   FileText, Upload, Download, Eye, Code2, Trash2, Copy, Check, X
 } from 'lucide-react'
 
+const mdComponents = {
+  tr: ({ node, ...props }) => (
+    <tr style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }} {...props} />
+  ),
+  table: ({ node, ...props }) => (
+    <table style={{ pageBreakInside: 'auto', breakInside: 'auto', width: '100%', borderCollapse: 'collapse' }} {...props} />
+  ),
+}
+
 const SAMPLE = `# Mein Bericht
 
 ## Zusammenfassung
@@ -205,7 +214,7 @@ export default function Home() {
                   </div>
                 )}
                 <article className="prose max-w-none">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
                     {markdown}
                   </ReactMarkdown>
                 </article>
